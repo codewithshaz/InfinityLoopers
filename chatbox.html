@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Recommendation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center p-6 font-sans">
+
+  <h1 class="text-3xl font-bold text-indigo-800 mb-6">AI Career Recommendation</h1>
+
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 flex flex-col">
+    
+    <!-- Chat Box -->
+    <div id="chat" class="flex-1 overflow-y-auto mb-4 h-96 p-4 border border-gray-200 rounded-lg">
+      <!-- Messages will appear here -->
+    </div>
+
+    <!-- Input -->
+    <form id="promptForm" class="flex">
+      <input 
+        type="text" 
+        id="userPrompt" 
+        placeholder="Type your prompt here..." 
+        class="flex-1 p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        required
+      />
+      <button 
+        type="submit" 
+        class="bg-indigo-600 text-white px-6 rounded-r-lg hover:bg-indigo-700 transition-colors"
+      >Send</button>
+    </form>
+
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const form = document.getElementById('promptForm');
+    const userPromptInput = document.getElementById('userPrompt');
+
+    // Replace this with your backend endpoint that calls an AI (OpenAI, Gemini, etc.)
+    async function fetchAIResponse(prompt) {
+      try {
+        const response = await fetch('YOUR_BACKEND_API_ENDPOINT', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+        const data = await response.json();
+        return data.reply; // assume backend returns { reply: "AI text" }
+      } catch (error) {
+        return "Sorry, I couldn't generate a response. Please try again.";
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userPrompt = userPromptInput.value.trim();
+      if (!userPrompt) return;
+
+      // Display user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'text-right mb-3';
+      userMsg.innerHTML = `<span class="inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-xl">${userPrompt}</span>`;
+      chat.appendChild(userMsg);
+
+      // Clear input
+      userPromptInput.value = '';
+
+      // Display "AI is typing..."
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'text-left mb-3';
+      aiMsg.innerHTML = `<span class="inline-block bg-gray-100 text-gray-800 px-4 py-2 rounded-xl">AI is typing...</span>`;
+      chat.appendChild(aiMsg);
+      chat.scrollTop = chat.scrollHeight;
+
+      // Get AI response
+      const reply = await fetchAIResponse(userPrompt);
+      aiMsg.innerHTML = `<span class="inline-block bg-gray-100 text-gray-800 px-4 py-2 rounded-xl whitespace-pre-line">${reply}</span>`;
+      chat.scrollTop = chat.scrollHeight;
+    });
+  </script>
+
+</body>
+</html>
