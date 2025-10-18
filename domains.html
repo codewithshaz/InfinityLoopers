@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domains & Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-sans">
+  <header class="bg-indigo-600 text-white text-center py-6 shadow-lg">
+    <h1 id="branchTitle" class="text-3xl font-bold"></h1>
+    <p class="text-lg mt-2">Choose your domain to see the roadmap</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+    <div id="domains" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+    <section id="roadmap" class="hidden mt-10">
+      <h2 class="text-2xl font-bold text-indigo-700 mb-4">Career Roadmap</h2>
+      <div id="roadmapContent" class="space-y-4"></div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const branch = params.get("branch");
+      const branchTitle = document.getElementById("branchTitle");
+      const domainsDiv = document.getElementById("domains");
+      const roadmapDiv = document.getElementById("roadmap");
+      const roadmapContent = document.getElementById("roadmapContent");
+
+      // All branches with domains and roadmap
+      const data = {
+        "CSE": {
+          name: "Computer Science & Engineering",
+          domains: [
+            { name: "Web Development", desc: "Frontend, backend, or full stack web applications.", roles: ["Frontend Developer", "Backend Developer", "Full Stack Engineer"] },
+            { name: "Data Science", desc: "Data analysis, machine learning, and AI.", roles: ["Data Scientist", "ML Engineer"] },
+            { name: "Cybersecurity", desc: "Protecting networks and systems.", roles: ["Ethical Hacker", "Security Analyst"] },
+            { name: "DevOps", desc: "Automation, CI/CD, and cloud deployment.", roles: ["DevOps Engineer", "Cloud Engineer"] },
+            { name: "AI & ML", desc: "Building intelligent, data-driven systems.", roles: ["AI Engineer", "ML Researcher"] },
+            { name: "App Development", desc: "Creating Android/iOS applications.", roles: ["Android Developer", "iOS Developer"] }
+          ],
+          roadmap: {
+            domain: "Web Development",
+            overview: "Focuses on building responsive and dynamic web solutions.",
+            disciplines: ["Frontend", "Backend", "Full Stack"],
+            roles: ["Frontend Developer", "Full Stack Engineer"],
+            steps: [
+              { title: "Phase 1", content: "Learn HTML, CSS, JavaScript." },
+              { title: "Phase 2", content: "Frameworks: React, Node.js, Express, MongoDB." },
+              { title: "Phase 3", content: "Projects & Deployment." },
+              { title: "Phase 4", content: "Apply for internships & jobs." }
+            ],
+            techSkills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Git"],
+            softSkills: ["Problem Solving", "Communication", "Teamwork"]
+          }
+        },
+        "IT": {
+          name: "Information Technology",
+          domains: [
+            { name: "Networking & Cloud", desc: "Network management and cloud computing.", roles: ["Network Engineer", "Cloud Architect"] },
+            { name: "Database Management", desc: "Designing and maintaining databases.", roles: ["Database Admin", "Data Engineer"] },
+            { name: "Web Technologies", desc: "Web systems and backend management.", roles: ["Web Developer", "Backend Engineer"] },
+            { name: "System Security", desc: "Information security and cryptography.", roles: ["Security Engineer", "System Analyst"] }
+          ],
+          roadmap: {
+            domain: "Networking & Cloud",
+            overview: "Focuses on server systems and scalable cloud infrastructure.",
+            disciplines: ["Networking", "Cloud Platforms"],
+            roles: ["Network Engineer", "Cloud Specialist"],
+            steps: [
+              { title: "Phase 1", content: "Learn OS basics, networking concepts." },
+              { title: "Phase 2", content: "Understand AWS, Azure, GCP." },
+              { title: "Phase 3", content: "Get certifications (AWS, CCNA)." }
+            ],
+            techSkills: ["AWS", "Azure", "Linux", "Docker", "Kubernetes"],
+            softSkills: ["Adaptability", "Analytical Thinking"]
+          }
+        },
+        "EE": {
+          name: "Electrical Engineering",
+          domains: [
+            { name: "Power Systems", desc: "Power generation and transmission.", roles: ["Power Engineer", "Electrical Designer"] },
+            { name: "Control Systems", desc: "Automation and signal processing.", roles: ["Control Engineer", "PLC Programmer"] },
+            { name: "Renewable Energy", desc: "Solar and wind systems.", roles: ["Solar Engineer", "Energy Analyst"] },
+            { name: "Electrical Machines", desc: "Motors, generators, transformers.", roles: ["Maintenance Engineer", "Testing Engineer"] }
+          ],
+          roadmap: {
+            domain: "Power Systems",
+            overview: "Deals with design and operation of power networks.",
+            disciplines: ["Circuit Theory", "Energy Systems", "Smart Grids"],
+            roles: ["Power Engineer", "Electrical Consultant"],
+            steps: [
+              { title: "Phase 1", content: "Understand circuit theory, machines." },
+              { title: "Phase 2", content: "Learn MATLAB, Simulink, SCADA." },
+              { title: "Phase 3", content: "Intern in power plants or energy firms." }
+            ],
+            techSkills: ["MATLAB", "Simulink", "AutoCAD Electrical"],
+            softSkills: ["Problem Solving", "Critical Thinking"]
+          }
+        },
+        "ECE": {
+          name: "Electronics & Communication Engineering",
+          domains: [
+            { name: "Embedded Systems", desc: "Hardware-software integration.", roles: ["Embedded Engineer", "IoT Engineer"] },
+            { name: "VLSI Design", desc: "Chip and circuit design.", roles: ["VLSI Engineer", "Hardware Design Engineer"] },
+            { name: "IoT", desc: "Smart devices connected via internet.", roles: ["IoT Developer", "Automation Engineer"] },
+            { name: "Telecommunication", desc: "Network design and optimization.", roles: ["RF Engineer", "Network Specialist"] }
+          ],
+          roadmap: {
+            domain: "Embedded Systems",
+            overview: "Combines coding and electronics for system-level integration.",
+            disciplines: ["Microcontrollers", "IoT", "Automation"],
+            roles: ["Embedded Engineer", "Hardware Engineer"],
+            steps: [
+              { title: "Phase 1", content: "Learn C/C++, microcontrollers (8051, ARM)." },
+              { title: "Phase 2", content: "Practice with Arduino, Raspberry Pi." },
+              { title: "Phase 3", content: "Develop IoT/robotics mini-projects." }
+            ],
+            techSkills: ["C", "C++", "Microcontrollers", "IoT Platforms"],
+            softSkills: ["Attention to Detail", "Critical Thinking"]
+          }
+        },
+        "ME": {
+          name: "Mechanical Engineering",
+          domains: [
+            { name: "Automobile Design", desc: "Vehicle mechanics and performance.", roles: ["Automobile Engineer", "Design Engineer"] },
+            { name: "Robotics", desc: "Automation systems and mechanics.", roles: ["Automation Engineer", "Robotics Engineer"] },
+            { name: "Thermal Systems", desc: "Heat engines and power plants.", roles: ["Thermal Engineer", "HVAC Specialist"] },
+            { name: "Manufacturing", desc: "Production processes and tools.", roles: ["Production Engineer", "CNC Engineer"] }
+          ],
+          roadmap: {
+            domain: "Automobile Design",
+            overview: "Focuses on automotive components and vehicle systems.",
+            disciplines: ["CAD", "Thermodynamics", "Design Analysis"],
+            roles: ["Automobile Engineer", "Mechanical Designer"],
+            steps: [
+              { title: "Phase 1", content: "Learn AutoCAD, SolidWorks." },
+              { title: "Phase 2", content: "Understand vehicle dynamics." },
+              { title: "Phase 3", content: "Intern at automotive firms." }
+            ],
+            techSkills: ["CAD", "MATLAB", "SolidWorks", "3D Modelling"],
+            softSkills: ["Precision", "Analytical Thinking"]
+          }
+        },
+        "CE": {
+          name: "Civil Engineering",
+          domains: [
+            { name: "Structural Design", desc: "Design of buildings and bridges.", roles: ["Structural Engineer", "Design Consultant"] },
+            { name: "Construction Management", desc: "Project planning and execution.", roles: ["Site Engineer", "Project Manager"] },
+            { name: "Geotechnical Engineering", desc: "Soil and foundation analysis.", roles: ["Geotechnical Engineer", "Survey Analyst"] },
+            { name: "Environmental Engineering", desc: "Sustainable development projects.", roles: ["Water Resource Engineer", "Environment Analyst"] }
+          ],
+          roadmap: {
+            domain: "Structural Design",
+            overview: "Focuses on design and safety of structures.",
+            disciplines: ["Statics", "Reinforced Concrete", "Surveying"],
+            roles: ["Structural Engineer", "Civil Designer"],
+            steps: [
+              { title: "Phase 1", content: "Learn AutoCAD, STAAD Pro, Revit." },
+              { title: "Phase 2", content:"hello"},
+              { title: "Phase 2", content: "Understand building codes and structural analysis." },
+              { title: "Phase 3", content: "Gain site and design experience." }
+            ],
+            techSkills: ["AutoCAD", "STAAD Pro", "Revit", "Construction Estimation"],
+            softSkills: ["Project Management", "Communication"]
+          }
+        }
+        // You can continue adding other branches like Chemical, Aerospace, etc. similarly
+      };
+
+      const branchData = data[branch];
+      branchTitle.textContent = branchData ? `${branchData.name} Domains` : "Branch Not Found";
+
+      if (!branchData) {
+        domainsDiv.innerHTML = `<p class='text-center text-gray-600'>No data available. Go back and select a branch properly.</p>`;
+        return;
+      }
+
+      // Render domain cards
+      domainsDiv.innerHTML = branchData.domains.map(
+        d => `
+        <div class="p-4 bg-indigo-50 rounded-lg shadow hover:bg-indigo-100 cursor-pointer domain-card" data-domain="${d.name}">
+          <h3 class="font-bold text-indigo-800">${d.name}</h3>
+          <p class="text-gray-700">${d.desc}</p>
+          <p class="text-sm text-gray-500 mt-2">Roles: ${d.roles.join(', ')}</p>
+        </div>`
+      ).join('');
+
+      // Domain click event
+      document.querySelectorAll(".domain-card").forEach(card => {
+        card.addEventListener("click", () => {
+          roadmapDiv.classList.remove("hidden");
+          const r = branchData.roadmap;
+          roadmapContent.innerHTML = `
+            <div class="p-4 bg-indigo-50 border-l-4 border-indigo-600 rounded-lg shadow-sm">
+              <h3 class="text-xl font-bold text-indigo-700">${r.domain}</h3>
+              <p class="text-gray-700 mb-2">${r.overview}</p>
+              <h4 class="font-semibold mt-3">Core Disciplines:</h4>
+              <ul class="list-disc list-inside text-gray-700">${r.disciplines.map(d => `<li>${d}</li>`).join('')}</ul>
+              <h4 class="font-semibold mt-3">Job Roles:</h4>
+              <ul class="list-disc list-inside text-gray-700">${r.roles.map(d => `<li>${d}</li>`).join('')}</ul>
+              <h4 class="font-semibold mt-3">Roadmap:</h4>
+              <ul class="text-gray-700">${r.steps.map(s => `<li><strong>${s.title}</strong>: ${s.content}</li>`).join('')}</ul>
+              <h4 class="font-semibold mt-3">Essential Skills:</h4>
+              <p><strong>Technical:</strong> ${r.techSkills.join(', ')}</p>
+              <p><strong>Soft:</strong> ${r.softSkills.join(', ')}</p>
+            </div>`;
+          window.scrollTo({ top: roadmapDiv.offsetTop, behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

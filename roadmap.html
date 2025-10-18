@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Guidance Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-sans">
+  <header class="bg-indigo-600 text-white text-center py-6 shadow-lg">
+    <h1 class="text-3xl font-bold">🎓 Student Guidance Roadmap</h1>
+    <p class="text-lg mt-2">Explore your Engineering journey!</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+    <!-- Engineering Button -->
+    <div class="text-center mb-6">
+      <button id="engineeringBtn" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition">
+        Engineering
+      </button>
+    </div>
+
+    <!-- Branch Selection -->
+    <section id="branchSelection" class="hidden mb-6">
+      <h2 class="text-xl font-bold text-indigo-700 mb-4">Select Your Branch</h2>
+      <div class="mb-4">
+        <h3 class="font-semibold text-indigo-600">Core / Traditional Branches</h3>
+        <div class="mt-2 space-x-2 flex flex-wrap">
+          <button class="branchBtn bg-indigo-100 text-indigo-800 py-2 px-4 rounded-lg mb-2" data-branch="cse">Computer Science & Engineering</button>
+          <button class="branchBtn bg-indigo-100 text-indigo-800 py-2 px-4 rounded-lg mb-2" data-branch="ee">Electrical Engineering</button>
+          <!-- Add other branches here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Domain Selection -->
+    <section id="domainSelection" class="hidden mb-6">
+      <h2 class="text-xl font-bold text-indigo-700 mb-4">Select a Domain / Specialization</h2>
+      <div id="domainButtons" class="flex flex-wrap gap-2"></div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="hidden">
+      <h2 class="text-2xl font-bold text-indigo-700 mb-4" id="roadmapTitle">Your Roadmap</h2>
+      <div id="roadmapContent" class="space-y-4 text-gray-700"></div>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 py-6 mt-10">
+    <p>© 2025 Student Pathways | Guided Learning for Every Dream</p>
+  </footer>
+
+  <script>
+    const engineeringBtn = document.getElementById('engineeringBtn');
+    const branchSelection = document.getElementById('branchSelection');
+    const domainSelection = document.getElementById('domainSelection');
+    const domainButtonsDiv = document.getElementById('domainButtons');
+    const roadmapSection = document.getElementById('roadmap');
+    const roadmapContent = document.getElementById('roadmapContent');
+    const roadmapTitle = document.getElementById('roadmapTitle');
+
+    // Branches → Domains → Roadmaps
+    const branchesData = {
+      cse: {
+        domains: [
+          { name: "Web Development", key: "webdev" },
+          { name: "Data Science & Analytics", key: "datascience" },
+          { name: "Artificial Intelligence & Machine Learning", key: "ai" },
+          { name: "Cybersecurity", key: "cybersecurity" },
+          { name: "Cloud & DevOps", key: "devops" },
+          { name: "Mobile App Development", key: "mobile" },
+          { name: "Embedded Systems & IoT", key: "iot" }
+        ]
+      }
+    };
+
+    const roadmapData = {
+      webdev: {
+        title: "Web Development",
+        content: `
+          <p><strong>Overview:</strong> Web development involves building websites and web applications, including frontend, backend, and fullstack development.</p>
+          <p><strong>Job Roles:</strong> Frontend Developer, Backend Developer, Fullstack Developer, UI/UX Developer.</p>
+          <p><strong>Skills Needed:</strong> HTML, CSS, JavaScript, React, Node.js, Databases (MySQL, MongoDB), Git/GitHub.</p>
+          <p><strong>Learning Path:</strong> HTML/CSS → JavaScript → React → Node.js → Projects → Portfolio → Internships.</p>
+          <p><strong>How to Get Placed:</strong> Build real projects, contribute to open-source, participate in hackathons, practice DSA for coding interviews.</p>
+        `
+      },
+      datascience: {
+        title: "Data Science & Analytics",
+        content: `
+          <p><strong>Overview:</strong> Data Science deals with extracting insights from data using programming, statistics, and ML techniques.</p>
+          <p><strong>Job Roles:</strong> Data Analyst, Data Scientist, Business Analyst.</p>
+          <p><strong>Skills Needed:</strong> Python, R, SQL, Statistics, Machine Learning, Data Visualization.</p>
+          <p><strong>Learning Path:</strong> Python → Statistics → Data Analysis Libraries → ML → Projects → Kaggle Competitions → Internships.</p>
+        `
+      },
+      ai: {
+        title: "Artificial Intelligence & Machine Learning",
+        content: `
+          <p><strong>Overview:</strong> AI/ML involves creating algorithms and models that can learn from data and make predictions.</p>
+          <p><strong>Job Roles:</strong> ML Engineer, AI Researcher, NLP Engineer, Computer Vision Engineer.</p>
+          <p><strong>Skills Needed:</strong> Python, ML algorithms, TensorFlow/PyTorch, Data Analysis, Deep Learning.</p>
+          <p><strong>Learning Path:</strong> Python → Statistics → ML Basics → Deep Learning → Projects → Competitions → Portfolio → Internships.</p>
+        `
+      },
+      cybersecurity: {
+        title: "Cybersecurity",
+        content: `
+          <p><strong>Overview:</strong> Cybersecurity involves protecting systems, networks, and applications from digital attacks.</p>
+          <p><strong>Job Roles:</strong> Security Analyst, Ethical Hacker, Network Security Engineer.</p>
+          <p><strong>Skills Needed:</strong> Networking, Linux, Python, Ethical Hacking, Security Tools.</p>
+          <p><strong>Learning Path:</strong> Networking → Linux → Security Concepts → Ethical Hacking → Labs & Projects → Certifications → Internships.</p>
+        `
+      },
+      devops: {
+        title: "Cloud & DevOps",
+        content: `
+          <p><strong>Overview:</strong> DevOps focuses on automating and streamlining development, deployment, and infrastructure in cloud environments.</p>
+          <p><strong>Job Roles:</strong> DevOps Engineer, Cloud Engineer, Release Manager.</p>
+          <p><strong>Skills Needed:</strong> Linux, CI/CD tools, Docker, Kubernetes, Cloud Platforms.</p>
+          <p><strong>Learning Path:</strong> Linux → Git → CI/CD → Docker → Kubernetes → Cloud → Projects → Internships.</p>
+        `
+      },
+      mobile: {
+        title: "Mobile App Development",
+        content: `
+          <p><strong>Overview:</strong> Building applications for Android, iOS, or cross-platform mobile frameworks.</p>
+          <p><strong>Job Roles:</strong> Android Developer, iOS Developer, Flutter Developer.</p>
+          <p><strong>Skills Needed:</strong> Java/Kotlin (Android), Swift (iOS), Flutter/React Native, UI/UX.</p>
+          <p><strong>Learning Path:</strong> Platform-specific SDK → Build Projects → Publish Apps → Portfolio → Internships.</p>
+        `
+      },
+      iot: {
+        title: "Embedded Systems & IoT",
+        content: `
+          <p><strong>Overview:</strong> Programming microcontrollers and IoT devices for smart systems and automation.</p>
+          <p><strong>Job Roles:</strong> Embedded Software Engineer, IoT Developer.</p>
+          <p><strong>Skills Needed:</strong> C/C++, Python, Microcontrollers, Sensors, Networking.</p>
+          <p><strong>Learning Path:</strong> Learn Electronics → C/C++ → Microcontroller Programming → IoT Projects → Portfolio → Internships.</p>
+        `
+      }
+    };
+
+    // Show branch selection on Engineering click
+    engineeringBtn.addEventListener('click', () => {
+      branchSelection.classList.remove('hidden');
+      domainSelection.classList.add('hidden');
+      roadmapSection.classList.add('hidden');
+    });
+
+    // Show domains on branch click
+    document.querySelectorAll('.branchBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const branchKey = btn.dataset.branch;
+        const branch = branchesData[branchKey];
+        if (!branch) return;
+
+        domainButtonsDiv.innerHTML = '';
+        branch.domains.forEach(domain => {
+          const b = document.createElement('button');
+          b.className = 'domainBtn bg-indigo-100 text-indigo-800 py-2 px-4 rounded-lg mb-2';
+          b.textContent = domain.name;
+          b.dataset.domain = domain.key;
+          domainButtonsDiv.appendChild(b);
+        });
+
+        branchSelection.classList.add('hidden');
+        domainSelection.classList.remove('hidden');
+        roadmapSection.classList.add('hidden');
+
+        // Add click events for domain buttons
+        document.querySelectorAll('.domainBtn').forEach(dbtn => {
+          dbtn.addEventListener('click', () => {
+            const domainKey = dbtn.dataset.domain;
+            const data = roadmapData[domainKey];
+            if (!data) return;
+            roadmapTitle.textContent = data.title;
+            roadmapContent.innerHTML = data.content;
+            roadmapSection.classList.remove('hidden');
+            window.scrollTo({ top: roadmapSection.offsetTop - 20, behavior: 'smooth' });
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

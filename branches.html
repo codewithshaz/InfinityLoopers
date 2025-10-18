@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Branch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-sans">
+  <header class="bg-indigo-600 text-white text-center py-6 shadow-lg">
+    <h1 class="text-3xl font-bold">Select Your Engineering Branch</h1>
+  </header>
+
+  <main class="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+
+    <!-- Core / Traditional -->
+    <section class="mb-6">
+      <h2 class="text-xl font-bold text-indigo-700 mb-4">Core / Traditional Branches</h2>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="goToDomain('CSE')" class="branch-btn">Computer Science & Engineering</button>
+        <button onclick="goToDomain('IT')" class="branch-btn">Information Technology</button>
+        <button onclick="goToDomain('EE')" class="branch-btn">Electrical Engineering</button>
+        <button onclick="goToDomain('ECE')" class="branch-btn">Electronics & Communication Engineering</button>
+        <button onclick="goToDomain('ME')" class="branch-btn">Mechanical Engineering</button>
+        <button onclick="goToDomain('CE')" class="branch-btn">Civil Engineering</button>
+        <button onclick="goToDomain('Chemical')" class="branch-btn">Chemical Engineering</button>
+        <button onclick="goToDomain('Aerospace')" class="branch-btn">Aerospace Engineering</button>
+        <button onclick="goToDomain('Metallurgical')" class="branch-btn">Metallurgical Engineering</button>
+        <button onclick="goToDomain('Instrumentation')" class="branch-btn">Instrumentation Engineering</button>
+      </div>
+    </section>
+
+    <!-- Modern / Emerging -->
+    <section class="mb-6">
+      <h2 class="text-xl font-bold text-indigo-700 mb-4">Modern / Emerging Branches</h2>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="goToDomain('AI')" class="branch-btn">AI & Machine Learning</button>
+        <button onclick="goToDomain('DataScience')" class="branch-btn">Data Science</button>
+        <button onclick="goToDomain('Cybersecurity')" class="branch-btn">Cybersecurity</button>
+        <button onclick="goToDomain('Robotics')" class="branch-btn">Robotics & Automation</button>
+        <button onclick="goToDomain('Biotech')" class="branch-btn">Biotechnology</button>
+        <button onclick="goToDomain('Environmental')" class="branch-btn">Environmental Engineering</button>
+        <button onclick="goToDomain('Renewable')" class="branch-btn">Renewable Energy</button>
+        <button onclick="goToDomain('Mechatronics')" class="branch-btn">Mechatronics</button>
+        <button onclick="goToDomain('Nanotech')" class="branch-btn">Nanotechnology</button>
+        <button onclick="goToDomain('Automobile')" class="branch-btn">Automobile Engineering</button>
+      </div>
+    </section>
+
+    <!-- Specialized / Interdisciplinary -->
+    <section>
+      <h2 class="text-xl font-bold text-indigo-700 mb-4">Specialized / Interdisciplinary Branches</h2>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="goToDomain('Industrial')" class="branch-btn">Industrial Engineering</button>
+        <button onclick="goToDomain('Marine')" class="branch-btn">Marine Engineering</button>
+        <button onclick="goToDomain('Mining')" class="branch-btn">Mining Engineering</button>
+        <button onclick="goToDomain('Petroleum')" class="branch-btn">Petroleum Engineering</button>
+        <button onclick="goToDomain('FoodTech')" class="branch-btn">Food Technology</button>
+        <button onclick="goToDomain('Textile')" class="branch-btn">Textile Engineering</button>
+        <button onclick="goToDomain('Manufacturing')" class="branch-btn">Production & Manufacturing</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function goToDomain(branch) {
+      window.location.href = `domains.html?branch=${branch}`;
+    }
+  </script>
+
+  <style>
+    .branch-btn {
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .branch-btn:hover {
+      background: #6366f1;
+      color: white;
+    }
+  </style>
+</body>
+</html>
