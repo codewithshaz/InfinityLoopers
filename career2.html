@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Recommendation System</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #4f46e5;
+      background: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #e0e7ff;
+      transform: scale(1.05);
+    }
+    .result {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .career {
+      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎓 Career Recommendation System (Engineering)</h1>
+
+  <div class="container">
+    <label for="skills">Your Key Skills:</label>
+    <input type="text" id="skills" placeholder="e.g., coding, problem solving, design" />
+
+    <label for="interests">Your Interests:</label>
+    <input type="text" id="interests" placeholder="e.g., AI, robotics, construction" />
+
+    <label for="education">Education Level:</label>
+    <select id="education">
+      <option value="">Select</option>
+      <option value="highschool">High School</option>
+      <option value="undergraduate">Undergraduate</option>
+      <option value="postgraduate">Postgraduate</option>
+    </select>
+
+    <label for="experience">Projects / Experience:</label>
+    <textarea id="experience" placeholder="Describe any project or experience briefly..."></textarea>
+
+    <button onclick="generateRecommendation()">Get Recommendations</button>
+
+    <div id="result" class="result"></div>
+    <div style="text-align: right;"><button>Go To RoadMap</button></div>
+  </div>
+
+  <script>
+    function generateRecommendation() {
+      const skills = document.getElementById("skills").value.toLowerCase();
+      const interests = document.getElementById("interests").value.toLowerCase();
+      const education = document.getElementById("education").value;
+      const experience = document.getElementById("experience").value.toLowerCase();
+
+      let recommendations = [];
+
+      // 🔹 Analyze based on skills & interests
+      if (skills.includes("coding") || interests.includes("ai") || interests.includes("software")) {
+        recommendations.push({
+          title: "Software Engineer / AI Developer",
+          desc: "Build intelligent software and AI systems for automation, analysis, and innovation."
+        });
+      }
+      if (skills.includes("design") || interests.includes("mechanical") || interests.includes("cad")) {
+        recommendations.push({
+          title: "Mechanical Design Engineer",
+          desc: "Design and optimize mechanical systems using CAD tools and simulation software."
+        });
+      }
+      if (skills.includes("circuit") || interests.includes("electronics") || interests.includes("hardware")) {
+        recommendations.push({
+          title: "Electronics / Embedded Systems Engineer",
+          desc: "Develop and test electronic systems, circuits, and IoT devices."
+        });
+      }
+      if (skills.includes("project management") || interests.includes("management")) {
+        recommendations.push({
+          title: "Engineering Project Manager",
+          desc: "Plan, lead, and manage technical projects and multidisciplinary teams."
+        });
+      }
+      if (skills.includes("civil") || interests.includes("construction") || interests.includes("architecture")) {
+        recommendations.push({
+          title: "Civil / Structural Engineer",
+          desc: "Design and supervise infrastructure like buildings, bridges, and highways."
+        });
+      }
+
+      // 🔹 Based on education
+      if (education === "highschool") {
+        recommendations.push({
+          title: "Diploma in Engineering Fields",
+          desc: "Start with a diploma in mechanical, computer, or civil engineering to build foundational skills."
+        });
+      } else if (education === "postgraduate") {
+        recommendations.push({
+          title: "Research / Data Scientist",
+          desc: "Explore advanced research opportunities or data-driven roles."
+        });
+      }
+
+      // 🔹 Based on experience keywords
+      if (experience.includes("robotics") || interests.includes("robot")) {
+        recommendations.push({
+          title: "Robotics Engineer",
+          desc: "Design and develop automated machines and intelligent robotics systems."
+        });
+      }
+      if (experience.includes("web") || skills.includes("frontend") || skills.includes("backend")) {
+        recommendations.push({
+          title: "Full Stack Web Developer",
+          desc: "Work on both frontend and backend development of modern web applications."
+        });
+      }
+
+      // If no matches found
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
+
+      if (recommendations.length === 0) {
+        resultDiv.innerHTML = <p>No strong matches found, but explore more in software, mechanical, or core engineering fields!</p>;
+      } else {
+        resultDiv.innerHTML = <h3>Recommended Careers for You:</h3>;
+        recommendations.forEach(r => {
+          resultDiv.innerHTML += `
+            <div class="career">
+              <strong>${r.title}</strong>
+              <p>${r.desc}</p>
+            </div>
+          `;
+        });
+      }
+    }
+  </script>
+</body>
+</html>
