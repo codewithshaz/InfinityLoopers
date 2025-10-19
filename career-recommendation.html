@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Recommendation</title>
+  <link rel="stylesheet" href="build.css" />
+  <style>
+    .form-container {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #339cff;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0f8ff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    #nextBtn {
+      margin-top: 15px;
+      display: none;
+      background: #28a745;
+    }
+
+    #nextBtn:hover {
+      background: #34c759;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Career Recommendation</h2>
+    
+    <div class="form-group">
+      <label for="interests">Your Interests</label>
+      <select id="interests">
+        <option value="">Select an interest</option>
+        <option value="Programming">Programming</option>
+        <option value="AI & ML">AI & ML</option>
+        <option value="Data Science">Data Science</option>
+        <option value="Cybersecurity">Cybersecurity</option>
+        <option value="Robotics">Robotics</option>
+        <option value="Web Development">Web Development</option>
+        <option value="Networking">Networking</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="skills">Existing Skills</label>
+      <input type="text" id="skills" placeholder="E.g., Python, C++, JavaScript" />
+    </div>
+
+    <div class="form-group">
+      <label for="education">Education Level</label>
+      <select id="education">
+        <option value="">Select education level</option>
+        <option value="High School">High School</option>
+        <option value="Diploma">Diploma</option>
+        <option value="Bachelor">Bachelor</option>
+        <option value="Master">Master</option>
+      </select>
+    </div>
+
+    <button id="predictBtn">Get Recommendations</button>
+    <div id="result"></div>
+    <button id="nextBtn">Next ➡️</button>
+  </div>
+
+  <script>
+    const predictBtn = document.getElementById("predictBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const resultDiv = document.getElementById("result");
+
+    predictBtn.addEventListener("click", () => {
+      const interests = document.getElementById("interests").value;
+      const skills = document.getElementById("skills").value.trim();
+      const education = document.getElementById("education").value;
+
+      if (!interests || !skills || !education) {
+        alert("Please fill all the fields.");
+        return;
+      }
+
+      let recommendation = "";
+
+      switch (interests) {
+        case "Programming":
+          recommendation = "Software Developer, Full Stack Developer, Mobile App Developer";
+          break;
+        case "AI & ML":
+          recommendation = "AI Engineer, Machine Learning Engineer, Data Scientist";
+          break;
+        case "Data Science":
+          recommendation = "Data Analyst, Data Scientist, Business Analyst";
+          break;
+        case "Cybersecurity":
+          recommendation = "Cybersecurity Analyst, Ethical Hacker, Security Consultant";
+          break;
+        case "Robotics":
+          recommendation = "Robotics Engineer, Automation Engineer, Embedded Systems Developer";
+          break;
+        case "Web Development":
+          recommendation = "Frontend Developer, Backend Developer, Full Stack Developer";
+          break;
+        case "Networking":
+          recommendation = "Network Engineer, Cloud Engineer, System Administrator";
+          break;
+        default:
+          recommendation = "No suitable recommendations found.";
+      }
+
+      // Save the recommendation
+      localStorage.setItem("careerRecommendations", recommendation);
+
+      // Show the recommendation and Next button
+      resultDiv.textContent = `Recommended careers: ${recommendation}`;
+      nextBtn.style.display = "block";
+    });
+
+    nextBtn.addEventListener("click", () => {
+      window.location.href = "career-options.html";
+    });
+  </script>
+
+</body>
+</html>

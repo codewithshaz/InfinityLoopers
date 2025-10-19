@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Career Path</title>
+  <link rel="stylesheet" href="build.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9fb;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      outline: none;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+    }
+    button:hover {
+      background-color: #339cff;
+    }
+    #careerDescription {
+      margin-top: 25px;
+      text-align: left;
+      line-height: 1.6;
+      background: #f0f8ff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    #roadmapBtn {
+      display: none;
+      margin-top: 20px;
+      background-color: #28a745;
+    }
+    #roadmapBtn:hover {
+      background-color: #34c759;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Select Your Recommended Career</h2>
+    <select id="careerDropdown"></select>
+    <button id="confirmBtn">Confirm Selection</button>
+    <div id="careerDescription"></div>
+    <button id="roadmapBtn">Generate Roadmap</button>
+  </div>
+
+  <script>
+    const dropdown = document.getElementById("careerDropdown");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const descriptionDiv = document.getElementById("careerDescription");
+    const roadmapBtn = document.getElementById("roadmapBtn");
+
+    const recommendation = localStorage.getItem("careerRecommendations");
+
+    if (recommendation && recommendation.trim() !== "") {
+      const careers = recommendation.split(",").map(c => c.trim());
+      dropdown.innerHTML = "";
+      careers.forEach(career => {
+        const option = document.createElement("option");
+        option.value = career;
+        option.textContent = career;
+        dropdown.appendChild(option);
+      });
+    } else {
+      dropdown.innerHTML = "<option>No recommendations found</option>";
+    }
+
+    const descriptions = {
+      "Software Developer": `A Software Developer designs and builds computer applications or systems.
+They work with programming languages like Python, Java, or C++.
+They collaborate with teams to develop scalable software solutions.
+Debugging and testing are key parts of their job.
+This career offers opportunities in tech companies, startups, and enterprises.`,
+
+      "Full Stack Developer": `A Full Stack Developer works on both frontend and backend web technologies.
+They handle databases, APIs, and server-side logic along with UI design.
+They typically use technologies like HTML, CSS, JavaScript, Node.js, and React.
+They ensure smooth communication between the user interface and databases.
+This role is perfect for people who enjoy building complete web solutions.`,
+
+      "Frontend Developer": `A Frontend Developer builds the user-facing part of websites or web apps.
+They work with HTML, CSS, and JavaScript frameworks like React or Vue.js.
+They focus on responsive design and smooth user experience.
+They collaborate with backend teams to connect data to interfaces.
+This career is ideal for those who enjoy creativity and web design.`,
+
+      "Backend Developer": `A Backend Developer manages the server-side of web applications.
+They work with databases, APIs, and authentication systems.
+Common tools include Node.js, Python, and SQL.
+They ensure data flows efficiently between users and servers.
+This role suits logical thinkers who enjoy solving technical problems.`
+    };
+
+    confirmBtn.addEventListener("click", () => {
+      const selected = dropdown.value;
+      if (selected && descriptions[selected]) {
+        descriptionDiv.textContent = descriptions[selected];
+        roadmapBtn.style.display = "block";
+        localStorage.setItem("selectedCareer", selected);
+      } else {
+        descriptionDiv.textContent = "No detailed information available for this selection.";
+        roadmapBtn.style.display = "none";
+      }
+    });
+
+    roadmapBtn.addEventListener("click", () => {
+      window.location.href = "career-roadmap.html";
+    });
+  </script>
+
+</body>
+</html>
